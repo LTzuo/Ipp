@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.ltz.ipp"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -24,4 +30,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
+
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //车牌键盘
+    compile 'com.parkingwang:keyboard:0.5.6'
+
+    //车牌识别
+    compile 'com.github.zcolin:zcolin_EasyPRLib:1.1.2'
+    //车牌自动识别库
+    compile 'com.github.SandroMachado:openalpr-android:1.1.2'
 }

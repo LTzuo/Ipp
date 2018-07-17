@@ -1,8 +1,13 @@
 package com.ltz.ipp;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * 地图Demo
@@ -43,6 +49,37 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
+        } else {
+          //  permissionGranted();
+        }
+    }
+
+    private void permissionGranted() {
+        Intent intent = new Intent(MainActivity.this, PlateDistinguishActivity.class);
+        startActivity(intent);
+        MainActivity.this.finish();
+    }
+
+    private void permissionDenied() {
+        Toast.makeText(MainActivity.this, "请赋予本程序拍照权限！", Toast.LENGTH_LONG)
+                .show();
+        MainActivity.this.finish();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 100 && permissions != null && grantResults != null && permissions.length > 0 && grantResults.length > 0) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                permissionGranted();
+            } else {
+                permissionDenied();
+            }
+        }
     }
 
     @Override
@@ -82,16 +119,22 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
+        if(id == R.id.binding_the_license_plate){
+          startActivity(new Intent(MainActivity.this,BindingPlateActivity.class));
+        }
+        else if(id == R.id.plate_distinguish){
+            Intent intent = new Intent(MainActivity.this, PlateDistinguishActivity.class);
+            startActivity(intent);
+        }else if(id == R.id.openalpr){
+           startActivity(new Intent(MainActivity.this,OpenalprActivity.class));
+        }
+         else if (id == R.id.baiduMap_sdk) {
+            startActivity(new Intent(MainActivity.this,BaiduMapActivity.class));
+        } else if (id == R.id.baiduYY_sdk) {
+            Toast.makeText(MainActivity.this,"百度鹰眼轨迹sdk",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.baiduNavigation_sdk) {
+            Toast.makeText(MainActivity.this,"百度导航sdk",Toast.LENGTH_SHORT).show();
+        }  else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
