@@ -125,7 +125,10 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.plate_distinguish){
             Intent intent = new Intent(MainActivity.this, PlateDistinguishActivity.class);
             startActivity(intent);
-        }else if(id == R.id.openalpr){
+        }else if(id == R.id.openCV){
+           Toast.makeText(MainActivity.this,"openCV",Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.openalpr){
            startActivity(new Intent(MainActivity.this,OpenalprActivity.class));
         }
          else if (id == R.id.baiduMap_sdk) {

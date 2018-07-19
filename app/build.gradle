@@ -41,4 +41,7 @@ dependencies {
     compile 'com.github.zcolin:zcolin_EasyPRLib:1.1.2'
     //车牌自动识别库
     compile 'com.github.SandroMachado:openalpr-android:1.1.2'
+
+    //OpenCV
+    compile 'com.github.ctodobom:OpenCV-3.1.0-Android:-SNAPSHOT'
 }

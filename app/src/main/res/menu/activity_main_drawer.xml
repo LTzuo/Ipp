@@ -16,6 +16,12 @@
             />
 
         <item
+            android:id="@+id/openCV"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="openCV实现车牌检测"
+            />
+
+        <item
             android:id="@+id/openalpr"
             android:icon="@drawable/ic_menu_camera"
             android:title="OpenalPR车牌识别"
